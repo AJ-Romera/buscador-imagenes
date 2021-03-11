@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import Formulario from './components/Formulario';
 
 function App() {
@@ -6,11 +7,23 @@ function App() {
     const [busqueda, setBusqueda] = useState('');
 
     useEffect(() => {
-        if (busqueda === '') {
-            return;
-        }
+        const consultarAPI = async () => {
+            if (busqueda === '') {
+                return;
+            }
 
-        const imagenesPorPagina = 30;
+            const baseUrl = process.env.REACT_APP_PIXABAY_BASE_API_URL;
+            const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
+            const imagenesPorPagina = 30;
+
+            const resultado = await axios.get(
+                `${baseUrl}?key=${apiKey}&q=${busqueda}&image_type=photo&per_page=${imagenesPorPagina}`
+            );
+
+            console.log(resultado.data.hits);
+            /* setBusqueda(resultado.data.hits); */
+        };
+        consultarAPI();
     }, [busqueda]);
 
     return (
