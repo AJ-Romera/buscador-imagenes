@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Error from './Error';
 
-function Formulario() {
+function Formulario({ setBusqueda }) {
     const [valorInput, setValorInput] = useState('');
     const [error, setError] = useState(false);
 
@@ -16,6 +16,7 @@ function Formulario() {
         setError(false);
 
         // Enviar el value de la búsqueda al componente principal
+        setBusqueda(valorInput);
     };
 
     return (
