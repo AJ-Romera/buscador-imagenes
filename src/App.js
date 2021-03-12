@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Formulario from './components/Formulario';
+import ListadoImagenes from './components/ListadoImagenes';
 
 function App() {
     // States de la app
     const [busqueda, setBusqueda] = useState('');
+    const [imagenes, setImagenes] = useState([]);
 
     useEffect(() => {
         const consultarAPI = async () => {
@@ -21,16 +23,19 @@ function App() {
             );
 
             console.log(resultado.data.hits);
-            /* setBusqueda(resultado.data.hits); */
+            setImagenes(resultado.data.hits);
         };
         consultarAPI();
     }, [busqueda]);
 
     return (
-        <div className='jumbotron'>
-            <div className='container'>
+        <div className='container'>
+            <div className='jumbotron'>
                 <p className='lead text-center'>Buscador de Imágenes</p>
                 <Formulario setBusqueda={setBusqueda} />
+            </div>
+            <div className='row justify-content-center'>
+                <ListadoImagenes imagenes={imagenes} />
             </div>
         </div>
     );
