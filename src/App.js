@@ -21,7 +21,7 @@ function App() {
             const imagenesPorPagina = 30;
 
             const resultado = await axios.get(
-                `${baseUrl}?key=${apiKey}&q=${busqueda}&image_type=photo&per_page=${imagenesPorPagina}`
+                `${baseUrl}?key=${apiKey}&q=${busqueda}&image_type=photo&per_page=${imagenesPorPagina}&page=${paginaActual}`
             );
 
             setImagenes(resultado.data.hits);
@@ -31,9 +31,13 @@ function App() {
                 resultado.data.totalHits / imagenesPorPagina
             );
             setTotalPaginas(calcularTotalPaginas);
+
+            // Volver al inicio de la página
+            const jumbo = document.querySelector('.jumbotron');
+            jumbo.scrollIntoView({ behavior: 'smooth' });
         };
         consultarAPI();
-    }, [busqueda]);
+    }, [busqueda, paginaActual]);
 
     // Definir la página anterior
     const paginaAnterior = () => {
@@ -66,21 +70,25 @@ function App() {
             <div className='row justify-content-center'>
                 <ListadoImagenes imagenes={imagenes} />
 
-                <button
-                    type='button'
-                    className='btn btn-info mr-1'
-                    onClick={paginaAnterior}
-                >
-                    &laquo; Anterior
-                </button>
+                {paginaActual === 1 ? null : (
+                    <button
+                        type='button'
+                        className='btn btn-info mr-1'
+                        onClick={paginaAnterior}
+                    >
+                        &laquo; Anterior
+                    </button>
+                )}
 
-                <button
-                    type='button'
-                    className='btn btn-info'
-                    onClick={paginaSiguiente}
-                >
-                    Siguiente &raquo;
-                </button>
+                {paginaActual === totalPaginas ? null : (
+                    <button
+                        type='button'
+                        className='btn btn-info'
+                        onClick={paginaSiguiente}
+                    >
+                        Siguiente &raquo;
+                    </button>
+                )}
             </div>
         </div>
     );
