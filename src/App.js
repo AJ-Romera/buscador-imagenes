@@ -22,7 +22,6 @@ function App() {
                 `${baseUrl}?key=${apiKey}&q=${busqueda}&image_type=photo&per_page=${imagenesPorPagina}`
             );
 
-            console.log(resultado.data.hits);
             setImagenes(resultado.data.hits);
         };
         consultarAPI();
