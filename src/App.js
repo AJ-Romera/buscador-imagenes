@@ -7,6 +7,8 @@ function App() {
     // States de la app
     const [busqueda, setBusqueda] = useState('');
     const [imagenes, setImagenes] = useState([]);
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [totalPaginas, setTotalPaginas] = useState(1);
 
     useEffect(() => {
         const consultarAPI = async () => {
@@ -23,6 +25,12 @@ function App() {
             );
 
             setImagenes(resultado.data.hits);
+
+            // Calcular el total de paginas
+            const calcularTotalPaginas = Math.ceil(
+                resultado.data.totalHits / imagenesPorPagina
+            );
+            setTotalPaginas(calcularTotalPaginas);
         };
         consultarAPI();
     }, [busqueda]);
