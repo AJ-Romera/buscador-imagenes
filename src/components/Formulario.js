@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 function Formulario({ setBusqueda }) {
     const [valorInput, setValorInput] = useState('');
@@ -45,5 +46,9 @@ function Formulario({ setBusqueda }) {
         </form>
     );
 }
+
+Formulario.propTypes = {
+    setBusqueda: PropTypes.func.isRequired,
+};
 
 export default Formulario;

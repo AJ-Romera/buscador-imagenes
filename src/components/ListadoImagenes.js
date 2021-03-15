@@ -1,5 +1,6 @@
 import React from 'react';
 import Imagen from './Imagen';
+import PropTypes from 'prop-types';
 
 function ListadoImagenes({ imagenes }) {
     return (
@@ -10,5 +11,9 @@ function ListadoImagenes({ imagenes }) {
         </div>
     );
 }
+
+ListadoImagenes.propTypes = {
+    imagenes: PropTypes.array.isRequired,
+};
 
 export default ListadoImagenes;

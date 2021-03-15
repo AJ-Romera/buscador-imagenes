@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Imagen({ imagen }) {
     // Extraer las variables
@@ -46,5 +47,9 @@ function Imagen({ imagen }) {
         </div>
     );
 }
+
+Imagen.propTypes = {
+    imagen: PropTypes.object.isRequired,
+};
 
 export default Imagen;
