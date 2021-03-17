@@ -1,4 +1,4 @@
-# App Clima con React
+# Web Buscador de Imágenes con React
 
 _Web Buscador de Imágenes de libre uso. Dichas imágenes son tomadas de Pixabay mediante su API. Cada imagen encontrada tiene diversa información y un botón que te redirige a la imágen en alta definición, desde ahí podrás descargarla y utilizarla libremente._
 
